@@ -1,6 +1,6 @@
 # Power Meter Emulator
 
-## Desictiption
+## Description
 The purpose of this script is to simulate an RS485 Modbus RTU Power Meter by using the data of an available power meter, in this case a GM EM2289.
 The script emulates the registers of an EASTRON SDM230. It is designed to be used in conjunction with a Fox ESS converter.
 
@@ -39,6 +39,6 @@ The script emulates the registers of an EASTRON SDM230. It is designed to be use
 
 
 
-## Soruces
+## Sources
 https://www.geeksforgeeks.org/python-program-to-represent-floating-number-as-hexadecimal-by-ieee-754-standard/
 https://chat.openai.com/chat
