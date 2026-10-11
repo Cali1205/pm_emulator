@@ -4,6 +4,18 @@
 The purpose of this script is to simulate an RS485 Modbus RTU Power Meter by using the data of an available power meter, in this case a GM EM2289.
 The script emulates the registers of an EASTRON SDM230. It is designed to be used in conjunction with a Fox ESS converter.
 
+## Optional MQTT output
+If `MQTT_HOST` is set, every value served to the inverter is also published to an MQTT broker (requires `pip install paho-mqtt`). Without `MQTT_HOST`, MQTT is fully disabled and paho-mqtt is not needed.
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `MQTT_HOST` | – (disabled) | Broker host |
+| `MQTT_PORT` | `1883` | Broker port |
+| `MQTT_USER` / `MQTT_PASSWORD` | – | Optional credentials |
+| `MQTT_TOPIC_PREFIX` | `pm_emulator` | Topics: `<prefix>/power` (W), `<prefix>/frequency` (Hz) |
+
+The publish happens after the response was written to the RS485 bus, uses QoS 0, and runs on paho's own network thread. Values are dropped while the broker is unreachable, so MQTT cannot slow down or block the emulation. For the systemd service add e.g. `Environment=MQTT_HOST=192.168.178.10` to the `[Service]` section.
+
 ## Run as service
 1. Create a systemd service file: `sudo nano /etc/systemd/system/pm_emulator.service`
 
